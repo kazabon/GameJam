@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://btmm5v8ypavqw"]
+
+[ext_resource type="PackedScene" uid="uid://kwqfgqnluif2" path="res://Scenes/WorldScenes/test_barrier_v.tscn" id="1_mi4t5"]
+[ext_resource type="PackedScene" uid="uid://dvfe6twsq7xy0" path="res://Scenes/WorldScenes/test_barrier.tscn" id="2_douk8"]
+[ext_resource type="PackedScene" uid="uid://bbsaejgh5l5sj" path="res://Scenes/PlayerScenes/player.tscn" id="3_4wkam"]
+[ext_resource type="PackedScene" uid="uid://dc4o7rke8jj5p" path="res://Scenes/WorldScenes/platform.tscn" id="3_vghck"]
+
+[node name="TestLevel" type="Node2D"]
+
+[node name="Barriers" type="Node" parent="."]
+
+[node name="TestBarrierV" parent="Barriers" instance=ExtResource("1_mi4t5")]
+position = Vector2(5, 90)
+
+[node name="TestBarrierV2" parent="Barriers" instance=ExtResource("1_mi4t5")]
+position = Vector2(315, 90)
+
+[node name="TestBarrier" parent="Barriers" instance=ExtResource("2_douk8")]
+position = Vector2(0, 5)
+
+[node name="TestBarrier2" parent="Barriers" instance=ExtResource("2_douk8")]
+position = Vector2(0, 175)
+
+[node name="Platforms" type="Node" parent="."]
+
+[node name="Platform" parent="Platforms" instance=ExtResource("3_vghck")]
+position = Vector2(108, 154)
+
+[node name="Platform2" parent="Platforms" instance=ExtResource("3_vghck")]
+position = Vector2(210, 131)
+
+[node name="Platform3" parent="Platforms" instance=ExtResource("3_vghck")]
+position = Vector2(108, 94)
+
+[node name="Platform4" parent="Platforms" instance=ExtResource("3_vghck")]
+position = Vector2(210, 64)
+
+[node name="Platform5" parent="Platforms" instance=ExtResource("3_vghck")]
+position = Vector2(108, 36)
+
+[node name="Node3" type="Node" parent="."]
+
+[node name="Node4" type="Node" parent="."]
+
+[node name="Player" parent="." instance=ExtResource("3_4wkam")]
+position = Vector2(32, 164)

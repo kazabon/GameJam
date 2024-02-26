@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dvfe6twsq7xy0"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_8ke1j"]
+size = Vector2(320, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_etmca"]
+size = Vector2(320, 10)
+
+[node name="TestBarrier" type="StaticBody2D"]
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+position = Vector2(160, 0)
+mesh = SubResource("QuadMesh_8ke1j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(160, 0)
+shape = SubResource("RectangleShape2D_etmca")
