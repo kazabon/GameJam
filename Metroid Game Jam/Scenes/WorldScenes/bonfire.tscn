@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=3 uid="uid://chh0d8mda0ql7"]
+
+[ext_resource type="Texture2D" uid="uid://cnusr24sgujlq" path="res://Assests/bonfire 32x48.png" id="1_6myh6"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5rlqh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ucqy"]
+atlas = ExtResource("1_6myh6")
+region = Rect2(0, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oqgf5"]
+atlas = ExtResource("1_6myh6")
+region = Rect2(32, 0, 32, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6lwxg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ucqy")
+}],
+"loop": true,
+"name": &"off",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oqgf5")
+}],
+"loop": true,
+"name": &"on",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_oklhk"]
+radius = 70.3491
+
+[node name="Bonfire" type="Area2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_5rlqh")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -13)
+sprite_frames = SubResource("SpriteFrames_6lwxg")
+animation = &"off"
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_oklhk")

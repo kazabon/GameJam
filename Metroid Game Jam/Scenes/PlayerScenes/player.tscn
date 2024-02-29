@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bbsaejgh5l5sj"]
+[gd_scene load_steps=14 format=3 uid="uid://bbsaejgh5l5sj"]
 
 [ext_resource type="Script" path="res://Scripts/PlayerScripts/player_control.gd" id="1_ltfjx"]
 [ext_resource type="Script" path="res://Scripts/PlayerScripts/PlayerStateMachine.gd" id="2_vnd1p"]
@@ -7,6 +7,8 @@
 [ext_resource type="Script" path="res://Scripts/PlayerScripts/AirState.gd" id="4_hj38u"]
 [ext_resource type="Script" path="res://Scripts/PlayerScripts/state_label.gd" id="5_xxcmd"]
 [ext_resource type="Script" path="res://Scripts/PlayerScripts/DashState.gd" id="6_30k0y"]
+[ext_resource type="Script" path="res://Scripts/PlayerScripts/MeleeAttack.gd" id="7_76mb0"]
+[ext_resource type="Script" path="res://Scripts/PlayerScripts/Wall.gd" id="7_pvl67"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tdeeo"]
 size = Vector2(10, 10)
@@ -14,9 +16,21 @@ size = Vector2(10, 10)
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_r0y44"]
 size = Vector2(10, 10)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("state_machine")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bt7mk"]
+size = Vector2(20, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fd77w"]
+size = Vector2(20, 10)
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "dash_state", "dash_cooldown", "right_hit", "left_hit")]
+collision_layer = 3
+collision_mask = 2044
 script = ExtResource("1_ltfjx")
 state_machine = NodePath("StateManager")
+dash_state = NodePath("StateManager/Dash")
+dash_cooldown = NodePath("DashCD")
+right_hit = NodePath("RightHitBox/RightCol")
+left_hit = NodePath("LeftHitBox/LeftCol")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_tdeeo")
@@ -24,29 +38,63 @@ shape = SubResource("RectangleShape2D_tdeeo")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("PlaceholderTexture2D_r0y44")
 
+[node name="FirePoint" type="Marker2D" parent="."]
+position = Vector2(5, 0)
+
+[node name="DashTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="DashCD" type="Timer" parent="."]
+wait_time = 0.2
+
 [node name="StateManager" type="Node" parent="." node_paths=PackedStringArray("player", "current_state")]
 script = ExtResource("2_vnd1p")
 player = NodePath("..")
 current_state = NodePath("Ground")
 
-[node name="Ground" type="Node" parent="StateManager" node_paths=PackedStringArray("dash_state", "air_state")]
+[node name="Ground" type="Node" parent="StateManager" node_paths=PackedStringArray("dash_state", "air_state", "fire_point")]
 script = ExtResource("3_1cvfg")
 dash_state = NodePath("../Dash")
 air_state = NodePath("../Air")
+fire_point = NodePath("../../FirePoint")
 
-[node name="Air" type="Node" parent="StateManager" node_paths=PackedStringArray("ground_state")]
+[node name="Air" type="Node" parent="StateManager" node_paths=PackedStringArray("ground_state", "wall_state", "ceiling_state")]
 script = ExtResource("4_hj38u")
 ground_state = NodePath("../Ground")
+wall_state = NodePath("../Wall")
+ceiling_state = NodePath("../Ceiling")
+can_dash = false
+can_attack = false
 
-[node name="Attack" type="Node" parent="StateManager"]
-script = ExtResource("3_hf4q1")
+[node name="Wall" type="Node" parent="StateManager" node_paths=PackedStringArray("ground_state", "air_state")]
+script = ExtResource("7_pvl67")
+ground_state = NodePath("../Ground")
+air_state = NodePath("../Air")
+can_dash = false
+can_attack = false
 
 [node name="Dash" type="Node" parent="StateManager" node_paths=PackedStringArray("ground_state", "air_state", "attack_state", "dash_timer")]
 script = ExtResource("6_30k0y")
 ground_state = NodePath("../Ground")
 air_state = NodePath("../Air")
-attack_state = NodePath("../Attack")
+attack_state = NodePath("../MeleeAttack")
 dash_timer = NodePath("../../DashTimer")
+can_dash = false
+can_attack = false
+
+[node name="MeleeAttack" type="Node" parent="StateManager"]
+script = ExtResource("7_76mb0")
+
+[node name="RangedAttack" type="Node" parent="StateManager"]
+script = ExtResource("3_hf4q1")
+
+[node name="ChargeAttack" type="Node" parent="StateManager"]
+
+[node name="Ceiling" type="Node" parent="StateManager"]
+script = ExtResource("3_hf4q1")
+
+[node name="SuperJump" type="Node" parent="StateManager"]
 
 [node name="Label" type="Label" parent="." node_paths=PackedStringArray("state_machine")]
 offset_left = -21.0
@@ -56,8 +104,25 @@ offset_bottom = -10.0
 script = ExtResource("5_xxcmd")
 state_machine = NodePath("../StateManager")
 
-[node name="DashTimer" type="Timer" parent="."]
-wait_time = 0.5
-one_shot = true
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="LeftHitBox" type="Area2D" parent="."]
+position = Vector2(-15, 0)
+
+[node name="LeftCol" type="CollisionShape2D" parent="LeftHitBox"]
+shape = SubResource("RectangleShape2D_bt7mk")
+disabled = true
+debug_color = Color(0.878431, 0.262745, 0.560784, 0.419608)
+
+[node name="RightHitBox" type="Area2D" parent="."]
+position = Vector2(15, 0)
+
+[node name="RightCol" type="CollisionShape2D" parent="RightHitBox"]
+shape = SubResource("RectangleShape2D_fd77w")
+disabled = true
+debug_color = Color(0.588235, 0.0196078, 0.352941, 0.505882)
 
 [connection signal="timeout" from="DashTimer" to="StateManager/Dash" method="_on_timer_timeout"]
+[connection signal="timeout" from="DashCD" to="." method="_on_dash_cd_timeout"]
+[connection signal="body_entered" from="LeftHitBox" to="." method="_on_left_hit_box_body_entered"]
+[connection signal="body_entered" from="RightHitBox" to="." method="_on_right_hit_box_body_entered"]
