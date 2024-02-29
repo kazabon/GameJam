@@ -6,6 +6,7 @@ var next_state: State
 
 @export var can_dash: bool = true
 @export var can_move: bool = true
+@export var can_attack: bool = true
 
 
 

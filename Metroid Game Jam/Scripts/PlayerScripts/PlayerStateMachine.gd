@@ -24,6 +24,8 @@ func can_move_check():
 	return current_state.can_move
 func can_dash_check():
 	return current_state.can_dash
+func can_attack_check():
+	return current_state.can_attack
 	
 	
 func switch_states(new_state :State):

@@ -70,6 +70,25 @@ grimoire={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":32,"key_label":0,"unicode":32,"echo":false,"script":null)
 ]
 }
+shoot={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":true,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":65,"key_label":0,"unicode":65,"echo":false,"script":null)
+]
+}
+
+[layer_names]
+
+2d_physics/layer_1="player1"
+2d_physics/layer_2="player2"
+2d_physics/layer_3="enemy"
+2d_physics/layer_4="micro_boss"
+2d_physics/layer_5="boss"
+2d_physics/layer_6="platform"
+2d_physics/layer_7="barrier"
+2d_physics/layer_8="wall"
+2d_physics/layer_9="interactions"
+2d_physics/layer_10="doors"
+2d_physics/layer_11="obstacle"
 
 [rendering]
 

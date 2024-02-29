@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://btmm5v8ypavqw"]
+[gd_scene load_steps=7 format=3 uid="uid://btmm5v8ypavqw"]
 
 [ext_resource type="PackedScene" uid="uid://kwqfgqnluif2" path="res://Scenes/WorldScenes/test_barrier_v.tscn" id="1_mi4t5"]
 [ext_resource type="PackedScene" uid="uid://dvfe6twsq7xy0" path="res://Scenes/WorldScenes/test_barrier.tscn" id="2_douk8"]
 [ext_resource type="PackedScene" uid="uid://bbsaejgh5l5sj" path="res://Scenes/PlayerScenes/player.tscn" id="3_4wkam"]
 [ext_resource type="PackedScene" uid="uid://dc4o7rke8jj5p" path="res://Scenes/WorldScenes/platform.tscn" id="3_vghck"]
+[ext_resource type="PackedScene" uid="uid://b8cxyityricup" path="res://Scenes/EnemyScenes/enemy.tscn" id="5_rib3v"]
+[ext_resource type="PackedScene" uid="uid://chh0d8mda0ql7" path="res://Scenes/WorldScenes/bonfire.tscn" id="6_lphvc"]
 
 [node name="TestLevel" type="Node2D"]
 
@@ -13,7 +15,7 @@
 position = Vector2(5, 90)
 
 [node name="TestBarrierV2" parent="Barriers" instance=ExtResource("1_mi4t5")]
-position = Vector2(315, 90)
+position = Vector2(960, 92)
 
 [node name="TestBarrier" parent="Barriers" instance=ExtResource("2_douk8")]
 position = Vector2(0, 5)
@@ -21,26 +23,41 @@ position = Vector2(0, 5)
 [node name="TestBarrier2" parent="Barriers" instance=ExtResource("2_douk8")]
 position = Vector2(0, 175)
 
+[node name="TestBarrier3" parent="Barriers" instance=ExtResource("2_douk8")]
+position = Vector2(320, 175)
+
+[node name="TestBarrier4" parent="Barriers" instance=ExtResource("2_douk8")]
+position = Vector2(640, 175)
+
+[node name="TestBarrier5" parent="Barriers" instance=ExtResource("2_douk8")]
+position = Vector2(320, 5)
+
+[node name="TestBarrier6" parent="Barriers" instance=ExtResource("2_douk8")]
+position = Vector2(640, 5)
+
 [node name="Platforms" type="Node" parent="."]
 
-[node name="Platform" parent="Platforms" instance=ExtResource("3_vghck")]
-position = Vector2(108, 154)
-
 [node name="Platform2" parent="Platforms" instance=ExtResource("3_vghck")]
-position = Vector2(210, 131)
+position = Vector2(252, 97)
 
 [node name="Platform3" parent="Platforms" instance=ExtResource("3_vghck")]
-position = Vector2(108, 94)
+position = Vector2(132, 117)
 
 [node name="Platform4" parent="Platforms" instance=ExtResource("3_vghck")]
-position = Vector2(210, 64)
+position = Vector2(590, 97)
 
 [node name="Platform5" parent="Platforms" instance=ExtResource("3_vghck")]
-position = Vector2(108, 36)
+position = Vector2(640, 55)
 
 [node name="Node3" type="Node" parent="."]
 
 [node name="Node4" type="Node" parent="."]
 
 [node name="Player" parent="." instance=ExtResource("3_4wkam")]
-position = Vector2(32, 164)
+position = Vector2(58, 120)
+
+[node name="Enemy" parent="." instance=ExtResource("5_rib3v")]
+position = Vector2(191, 164)
+
+[node name="Bonfire" parent="." instance=ExtResource("6_lphvc")]
+position = Vector2(107, 159)
