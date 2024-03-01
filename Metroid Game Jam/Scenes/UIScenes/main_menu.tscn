@@ -1,0 +1,57 @@
+[gd_scene load_steps=5 format=3 uid="uid://dusyyu5di1khq"]
+
+[ext_resource type="Script" path="res://Scripts/GlobalScripts/main_menu.gd" id="1_m1wah"]
+[ext_resource type="FontFile" uid="uid://6v2cdyuoew7s" path="res://Assests/Fonts/metroid_jam/PressStart2P-Regular.ttf" id="2_rvtb4"]
+[ext_resource type="FontFile" uid="uid://cg3osxuunj1j7" path="res://Assests/Fonts/metroid_jam/SuperMario256.ttf" id="3_la4t2"]
+[ext_resource type="FontFile" uid="uid://ckmffllrte3oe" path="res://Assests/Fonts/metroid_jam/Pokemon_Classic.ttf" id="4_0gnsr"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_m1wah")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Play" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_rvtb4")
+text = "Play"
+
+[node name="Options" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_rvtb4")
+text = "Options"
+
+[node name="Quit" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_rvtb4")
+text = "Quit"
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_la4t2")
+text = "Tario 64"
+
+[node name="Button2" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_0gnsr")
+text = "Lokemon Purple"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

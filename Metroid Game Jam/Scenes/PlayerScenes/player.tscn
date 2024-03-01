@@ -11,10 +11,10 @@
 [ext_resource type="Script" path="res://Scripts/PlayerScripts/Wall.gd" id="7_pvl67"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tdeeo"]
-size = Vector2(10, 10)
+size = Vector2(32, 32)
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_r0y44"]
-size = Vector2(10, 10)
+size = Vector2(32, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bt7mk"]
 size = Vector2(20, 10)
@@ -53,11 +53,12 @@ script = ExtResource("2_vnd1p")
 player = NodePath("..")
 current_state = NodePath("Ground")
 
-[node name="Ground" type="Node" parent="StateManager" node_paths=PackedStringArray("dash_state", "air_state", "fire_point")]
+[node name="Ground" type="Node" parent="StateManager" node_paths=PackedStringArray("dash_state", "air_state", "fire_point", "melee_state")]
 script = ExtResource("3_1cvfg")
 dash_state = NodePath("../Dash")
 air_state = NodePath("../Air")
 fire_point = NodePath("../../FirePoint")
+melee_state = NodePath("../MeleeAttack")
 
 [node name="Air" type="Node" parent="StateManager" node_paths=PackedStringArray("ground_state", "wall_state", "ceiling_state")]
 script = ExtResource("4_hj38u")
@@ -85,6 +86,7 @@ can_attack = false
 
 [node name="MeleeAttack" type="Node" parent="StateManager"]
 script = ExtResource("7_76mb0")
+can_move = false
 
 [node name="RangedAttack" type="Node" parent="StateManager"]
 script = ExtResource("3_hf4q1")
@@ -105,6 +107,7 @@ script = ExtResource("5_xxcmd")
 state_machine = NodePath("../StateManager")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.5, 0.5)
 
 [node name="LeftHitBox" type="Area2D" parent="."]
 position = Vector2(-15, 0)

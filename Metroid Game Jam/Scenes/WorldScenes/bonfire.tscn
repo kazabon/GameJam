@@ -48,3 +48,5 @@ animation = &"off"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_oklhk")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]

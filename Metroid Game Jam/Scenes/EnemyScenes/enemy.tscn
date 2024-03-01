@@ -1,6 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://b8cxyityricup"]
+[gd_scene load_steps=7 format=3 uid="uid://b8cxyityricup"]
 
 [ext_resource type="Script" path="res://Scripts/EnemyScripts/enemy_controller.gd" id="1_pnrg4"]
+[ext_resource type="Script" path="res://Scripts/EnemyScripts/EnemyStateManager.gd" id="2_b4jga"]
+[ext_resource type="Script" path="res://Scripts/EnemyScripts/PatrolPoints.gd" id="3_qbonb"]
+[ext_resource type="Script" path="res://Scripts/EnemyScripts/enemy_state_manager.gd" id="3_w8pab"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xq03k"]
 size = Vector2(10, 10)
@@ -8,10 +11,14 @@ size = Vector2(10, 10)
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_880pk"]
 size = Vector2(10, 10)
 
-[node name="Enemy" type="CharacterBody2D" groups=["hit"]]
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "detect_player", "patrol_points") groups=["hit"]]
 collision_layer = 4
 collision_mask = 227
 script = ExtResource("1_pnrg4")
+gravity = null
+state_machine = NodePath("EnemyStateManager")
+detect_player = NodePath("RayCast2D")
+patrol_points = NodePath("PatrolPoints")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_xq03k")
@@ -19,3 +26,33 @@ shape = SubResource("RectangleShape2D_xq03k")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0.352941, 0.894118, 0.352941, 1)
 texture = SubResource("PlaceholderTexture2D_880pk")
+
+[node name="EnemyStateManager" type="Node" parent="."]
+script = ExtResource("2_b4jga")
+
+[node name="Idle" type="Node" parent="EnemyStateManager"]
+script = ExtResource("3_w8pab")
+
+[node name="Active" type="Node" parent="EnemyStateManager"]
+script = ExtResource("3_w8pab")
+
+[node name="Attack" type="Node" parent="EnemyStateManager"]
+script = ExtResource("3_w8pab")
+
+[node name="Follow" type="Node" parent="EnemyStateManager"]
+script = ExtResource("3_w8pab")
+
+[node name="PatrolPoints" type="Node" parent="." node_paths=PackedStringArray("point_a", "point_b")]
+script = ExtResource("3_qbonb")
+point_a = NodePath("PointA")
+point_b = NodePath("PointB")
+
+[node name="PointA" type="Marker2D" parent="PatrolPoints"]
+script = ExtResource("3_qbonb")
+
+[node name="PointB" type="Marker2D" parent="PatrolPoints"]
+script = ExtResource("3_qbonb")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+
+[node name="Blank" type="Node" parent="."]

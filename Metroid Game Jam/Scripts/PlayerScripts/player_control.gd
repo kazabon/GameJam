@@ -18,7 +18,7 @@ func _physics_process(delta):
 	move()
 	apply_gravity()
 	move_and_slide()
-	attack()
+
 	
 func move():
 	if Input.is_action_just_pressed("dash") && state_machine.can_dash_check():
@@ -39,15 +39,7 @@ func move():
 func apply_gravity():
 		velocity.y += gravity
 
-func attack():
-	if state_machine.can_attack_check():
-		if Input.is_action_just_pressed("right") && Input.is_action_just_pressed("attack"):
-			right_hit.disabled = false
-		elif Input.is_action_just_pressed("attack") && Input.is_action_just_pressed("left"):
-			left_hit.disabled = false
-		else:
-			right_hit.disabled = true
-			left_hit.disabled = true
+
 	 
 		
 
