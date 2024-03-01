@@ -6,7 +6,7 @@ class_name DashState
 @export var air_state: State
 @export var attack_state: State 
 @export var dash_timer: Timer
-@export var jump_power: float = 900
+@export var jump_power: float = -900
 
 func enter():
 	dash_timer.start()
@@ -23,3 +23,4 @@ func _on_timer_timeout():
 
 func super_jump():
 	player.velocity.y = jump_power
+	next_state = air_state
