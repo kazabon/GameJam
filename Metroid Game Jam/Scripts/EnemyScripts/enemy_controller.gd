@@ -14,4 +14,4 @@ signal damaged
 func take_damage():
 	damaged.emit()
 	
-func 
+func
