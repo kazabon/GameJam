@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://chh0d8mda0ql7"]
 
-[ext_resource type="Texture2D" uid="uid://cnusr24sgujlq" path="res://Assests/bonfire 32x48.png" id="1_6myh6"]
+[ext_resource type="Texture2D" uid="uid://cnusr24sgujlq" path="res://Assests/Objects/bonfire 32x48.png" id="1_6myh6"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5rlqh"]
 
